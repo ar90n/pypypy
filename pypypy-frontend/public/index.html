@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+	  <title>pypypy</title>
+      <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css"> 
+  </head>
+  <body>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.js"
+    ></script>
+    <script type="text/javascript">
+      async function main() {
+        let pyodide = await loadPyodide();
+        await pyodide.loadPackage("micropip");
+
+        const initScript = await fetch("./pkg_install.py");
+        const initScriptText = await initScript.text();
+        await pyodide.runPythonAsync(initScriptText);
+
+        const script = await fetch("./main.py");
+        const scriptText = await script.text();
+        await pyodide.runPythonAsync(scriptText);
+      }
+      main();
+    </script>
+    <div id="root"></div>
+  </body>
+</html>
