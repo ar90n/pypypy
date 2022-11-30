@@ -2,12 +2,9 @@
 from pathlib import Path
 
 import aws_cdk as cdk
-from aws_cdk import (
-    Stack,
-    RemovalPolicy,
-    aws_s3 as s3,
-    aws_s3_deployment as s3deploy,
-)
+from aws_cdk import RemovalPolicy, Stack
+from aws_cdk import aws_s3 as s3
+from aws_cdk import aws_s3_deployment as s3deploy
 from constructs import Construct
 
 

@@ -1,5 +1,5 @@
-from typing import Callable, Generic, Any, TypeVar
 from dataclasses import dataclass
+from typing import Any, Callable, Generic, TypeVar
 
 from alfort.vdom import VDom, el
 from alfort_dom.event import handler

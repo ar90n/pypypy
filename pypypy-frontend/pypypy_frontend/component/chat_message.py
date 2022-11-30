@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 from alfort.vdom import VDom, el
 
+
 @dataclass(frozen=True)
 class Props:
     author: str

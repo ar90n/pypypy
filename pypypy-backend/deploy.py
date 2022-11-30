@@ -2,13 +2,11 @@
 import os
 
 import aws_cdk as cdk
-from aws_cdk import (
-    Stack,
-    aws_lambda as _lambda,
-    aws_apigatewayv2 as apigateway,
-    aws_dynamodb as dynamodb,
-    aws_iam as iam,
-)
+from aws_cdk import Stack
+from aws_cdk import aws_apigatewayv2 as apigateway
+from aws_cdk import aws_dynamodb as dynamodb
+from aws_cdk import aws_iam as iam
+from aws_cdk import aws_lambda as _lambda
 from constructs import Construct
 
 stage_name = os.environ.get("STAGE", "dev")
@@ -54,7 +52,7 @@ class PypypyBackendStack(Stack):
             "PypypyBackendApi",
             name="pypypy-websocket-relay-api",
             protocol_type="WEBSOCKET",
-            route_selection_expression="\$default",
+            route_selection_expression=r"\$default",
         )
 
         connect_lambda = _lambda.Function(
@@ -110,11 +108,11 @@ class PypypyBackendStack(Stack):
             "connect-integration",
             api_id=message_relay_api.ref,
             integration_type="AWS_PROXY",
-            integration_uri=f"arn:aws:apigateway:ap-northeast-1:lambda:path/2015-03-31/functions/{connect_lambda.function_arn}/invocations",
+            integration_uri=f"arn:aws:apigateway:ap-northeast-1:lambda:path/2015-03-31/functions/{connect_lambda.function_arn}/invocations",  # noqa: E501
             credentials_arn=apigw_role.role_arn,
         )
 
-        connect_route = apigateway.CfnRoute(
+        apigateway.CfnRoute(
             self,
             "connect-route",
             api_id=message_relay_api.ref,
@@ -127,11 +125,11 @@ class PypypyBackendStack(Stack):
             "disconnect-integration",
             api_id=message_relay_api.ref,
             integration_type="AWS_PROXY",
-            integration_uri=f"arn:aws:apigateway:ap-northeast-1:lambda:path/2015-03-31/functions/{disconnect_lambda.function_arn}/invocations",
+            integration_uri=f"arn:aws:apigateway:ap-northeast-1:lambda:path/2015-03-31/functions/{disconnect_lambda.function_arn}/invocations",  # noqa: E501
             credentials_arn=apigw_role.role_arn,
         )
 
-        disconnect_route = apigateway.CfnRoute(
+        apigateway.CfnRoute(
             self,
             "disconnect-route",
             api_id=message_relay_api.ref,
@@ -145,11 +143,11 @@ class PypypyBackendStack(Stack):
             "default-integration",
             api_id=message_relay_api.ref,
             integration_type="AWS_PROXY",
-            integration_uri=f"arn:aws:apigateway:ap-northeast-1:lambda:path/2015-03-31/functions/{relay_lambda.function_arn}/invocations",
+            integration_uri=f"arn:aws:apigateway:ap-northeast-1:lambda:path/2015-03-31/functions/{relay_lambda.function_arn}/invocations",  # noqa: E501
             credentials_arn=apigw_role.role_arn,
         )
 
-        default_route = apigateway.CfnRoute(
+        apigateway.CfnRoute(
             self,
             "default-route",
             api_id=message_relay_api.ref,
@@ -162,7 +160,7 @@ class PypypyBackendStack(Stack):
             self, "pypypy-backend-deployment", api_id=message_relay_api.ref
         )
 
-        stage = apigateway.CfnStage(
+        apigateway.CfnStage(
             self,
             "pypypy-backend-stage",
             api_id=message_relay_api.ref,

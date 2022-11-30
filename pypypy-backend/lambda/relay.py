@@ -1,7 +1,7 @@
 import os
 
-import botocore.exceptions
 import boto3
+import botocore.exceptions
 
 TABLE_NAME = "pypypy-websocket-connection"
 

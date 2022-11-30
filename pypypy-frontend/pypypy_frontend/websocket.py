@@ -1,4 +1,5 @@
-from typing import Callable, Any, TypeAlias
+from typing import Any, Callable, TypeAlias
+
 from js import WebSocket
 from pyodide.ffi import create_proxy
 

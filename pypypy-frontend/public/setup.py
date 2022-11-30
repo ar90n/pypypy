@@ -1,4 +1,5 @@
 import os
+
 import micropip  # type: ignore # noqa: F401
 
 os.environ.update(
