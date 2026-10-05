@@ -66,8 +66,7 @@ class UpdateName:
 
 
 @dataclass(frozen=True)
-class RequestEnterChat:
-    ...
+class RequestEnterChat: ...
 
 
 @dataclass(frozen=True)
@@ -82,8 +81,7 @@ class UpdateMessage:
 
 
 @dataclass(frozen=True)
-class SendMessage:
-    ...
+class SendMessage: ...
 
 
 @dataclass(frozen=True)
